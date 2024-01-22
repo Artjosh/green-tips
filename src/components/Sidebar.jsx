@@ -2,6 +2,7 @@ import React from 'react';
 
 const Sidebar = () => {
     return (
+        opasdkaposdkaposdkopsad
         <div id="mySidebar" className="sidebar">
             <a href="javascript:void(0)" className="closebtn">&times;</a>
             <a href="#introducao-ao-bac-bo">Introdução ao Bac Bo</a>
