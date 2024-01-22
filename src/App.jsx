@@ -1,29 +1,33 @@
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'; // Seu arquivo CSS
+import Sidebar from './components/Sidebar';
+import MainContent from './components/MainContent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [theme, setTheme] = useState('light');
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!isSidebarOpen);
+    };
+
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
+    return (
+        <div className={`${theme}-mode`}>
+            <div className="header-bar">
+              <span className="menu-icon" onClick={toggleSidebar}>&#9776;</span>
+              <span className="theme-icon" onClick={toggleTheme}>
+                  {theme === 'light' ? '🌞' : '🌙'}
+              </span>
+            </div>
+
+            <Sidebar isOpen={isSidebarOpen} />
+            <MainContent />
+        </div>
+    );
+};
 
 export default App;

@@ -1,31 +1,147 @@
-.App {
-  text-align: center;
+body {
+  transition: background-color 0.3s;
+  scroll-snap-type: y mandatory; /* Ativa o scroll snap vertical */
+  overflow-y: scroll; /* Garante rolagem no corpo da página */
+  height: 100vh;
+}
+.light-mode {
+  background-color: #00ff3d; /* green-light */
+  color: black;
+}
+.dark-mode {
+  background-color: #155724; /* green-dark */
+  color: black;
+}
+.header-bar {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+.menu-icon, .theme-icon {
+  cursor: pointer;
+  font-size: 24px;
+}
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.gif-container {
+  display: flex; /* Usa Flexbox para alinhamento */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  padding-top: 70px;
+  margin-bottom: 50px;
+  height: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.responsive-gif {
+  max-width: 100%; /* Faz a largura da imagem nunca ultrapassar 100% do container */
+  height: auto; /* Mantém a proporção da altura em relação à largura */
+  margin: auto; /* Adiciona margem automática para centralização adicional */
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.section-container {
+  background-color: #f5f5f5; /* Fundo cinza claro para cada seção */
+  border-radius: 8px; /* Bordas arredondadas */
+  margin: 20px 20px 20px 20px; /* Espaçamento entre as seções */
+  padding: 20px; /* Espaçamento interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  height: 80vh;
+}
+/* Estilização dos títulos h2 */
+.section-title {
+  text-align: center; /* Centraliza os títulos */
+  margin-bottom: 15px; /* Espaçamento abaixo do título */
+  color: #28a745; /* Cor do título */
+}
+/* Estilização do texto da seção */
+.section-text {
+  text-align: justify; /* Alinhamento justificado do texto */
+}
+.gif-container, .section-container {
+  scroll-snap-align: start; /* Alinha os elementos com o início da viewport */
+}
+html {
+  scroll-behavior: smooth;
+}
+.section-anchor {
+  display: block;
+  height: 70px; /* Ajuste conforme a altura do seu cabeçalho */
+  margin-top: -70px; /* Mesmo valor negativo da altura */
+  visibility: hidden;
+}
+.content-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+@media (min-width: 1000px) {
+  .content-wrapper {
+      flex-direction: row;
+  }
+  .content-wrapper:nth-child(even) {
+      flex-direction: row-reverse;
+  }
+  .section-text, .section-image {
+      flex: 1;
+  }
+  .section-image {
+      max-width: 35%;
+  }
+  .section-text {
+      padding: 20px;
+  }
 }
 
-.heart {
-  color: #ff0000;
+.container{
+  height: 100%;
 }
 
-.small {
-  font-size: 0.75rem;
+.section-image {
+  flex-grow: 1; /* Faz a div da imagem ocupar o espaço restante */
+  display: flex;
+  justify-content: center; /* Centraliza a imagem horizontalmente */
+  align-items: flex-start; /* Alinha a imagem ao topo do espaço disponível */
+  overflow: hidden; /* Evita que a imagem ultrapasse o container */
+}
+
+.section-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+#metas {
+  font-size: x-large;
 }

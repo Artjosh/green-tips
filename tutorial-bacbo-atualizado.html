@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Dice E-book</title>
+    <link rel="icon" href="https://i.postimg.cc/htC38GmH/favicon.png" type="image/png">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            transition: background-color 0.3s;
+            scroll-snap-type: y mandatory; /* Ativa o scroll snap vertical */
+            overflow-y: scroll; /* Garante rolagem no corpo da página */
+        }
+        .light-mode {
+            background-color: #00ff3d; /* green-light */
+            color: black;
+        }
+        .dark-mode {
+            background-color: #155724; /* green-dark */
+            color: black;
+        }
+        .header-bar {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 2;
+        }
+        .menu-icon, .theme-icon {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .gif-container {
+            display: flex; /* Usa Flexbox para alinhamento */
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            padding-top: 70px;
+            margin-bottom: 50px;
+            height: auto;
+        }
+
+        .responsive-gif {
+            max-width: 100%; /* Faz a largura da imagem nunca ultrapassar 100% do container */
+            height: auto; /* Mantém a proporção da altura em relação à largura */
+            margin: auto; /* Adiciona margem automática para centralização adicional */
+        }
+        .section-container {
+            background-color: #f5f5f5; /* Fundo cinza claro para cada seção */
+            border-radius: 8px; /* Bordas arredondadas */
+            margin: 20px 0; /* Espaçamento entre as seções */
+            padding: 20px; /* Espaçamento interno */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            height: 80vh;
+        }
+        /* Estilização dos títulos h2 */
+        .section-title {
+            text-align: center; /* Centraliza os títulos */
+            margin-bottom: 15px; /* Espaçamento abaixo do título */
+            color: #28a745; /* Cor do título */
+        }
+        /* Estilização do texto da seção */
+        .section-text {
+            text-align: justify; /* Alinhamento justificado do texto */
+        }
+        .gif-container, .section-container {
+            scroll-snap-align: start; /* Alinha os elementos com o início da viewport */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .section-anchor {
+            display: block;
+            height: 70px; /* Ajuste conforme a altura do seu cabeçalho */
+            margin-top: -70px; /* Mesmo valor negativo da altura */
+            visibility: hidden;
+        }
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        @media (min-width: 1000px) {
+            .content-wrapper {
+                flex-direction: row;
+            }
+            .content-wrapper:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+            .section-text, .section-image {
+                flex: 1;
+            }
+            .section-image {
+                max-width: 35%;
+            }
+            .section-text {
+                padding: 20px;
+            }
+        }
+
+        .section-image {
+            flex-grow: 1; /* Faz a div da imagem ocupar o espaço restante */
+            display: flex;
+            justify-content: center; /* Centraliza a imagem horizontalmente */
+            align-items: flex-start; /* Alinha a imagem ao topo do espaço disponível */
+            overflow: hidden; /* Evita que a imagem ultrapasse o container */
+        }
+
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
+        #metas {
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+<div class="header-bar">
+    <span class="menu-icon" onclick="openNav()">&#9776;</span>
+    <span class="theme-icon" id="themeIcon" onclick="toggleTheme()">☀</span>
+</div>
+
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#introducao-ao-bac-bo" onclick="closeNav()">Introdução ao Bac Bo</a>
+    <a href="#gestao-de-banca" onclick="closeNav()">Gestão de Banca</a>
+    <a href="#estabelecendo-metas-no-cassino" onclick="closeNav()">Estabelecendo Metas no Cassino</a>
+    <a href="#localizando-o-jogo" onclick="closeNav()">Localizando o Jogo</a>
+    <a href="#nossa-estrategia-com-martingale" onclick="closeNav()">Nossa Estratégia com Martingale</a>
+    <a href="#compreendendo-as-notificacoes" onclick="closeNav()">Compreendendo as Notificações</a>
+    <a href="#realizando-a-entrada" onclick="closeNav()">Realizando a Entrada</a>
+</div>
+
+<div class="gif-container">
+<img src="https://i.postimg.cc/90vXLZxY/V-deo-sem-t-tulo-Feito-com-o-Clipchamp.gif" class="responsive-gif" id="responsive-gif">
+</div>
+
+<div class="container">
+    <div class="section-anchor" id="introducao-ao-bac-bo"></div>
+    <div class="section-container">
+        <div class="content-wrapper">
+            <div class="section-text">
+                <h2 class="section-title" >Introdução ao Bac Bo: Um Jogo de Cassino Dinâmico</h2>
+                <p class="section-text">Bac Bo, um emocionante jogo de cassino ao vivo, é uma versão simplificada e ágil do tradicional jogo de dados. Os resultados possíveis são três: azul (player), vermelho (banker) e marrom (tie). Durante o jogo, dois dados de cada cor (azul e vermelho) são lançados, e a soma deles determina o vencedor: player, banker ou empate.</p>
+            </div>
+            <div class="section-image">
+                <img src="https://i.postimg.cc/wTrPXjSt/intro.png" alt="Introdução">
+            </div>
+        </div>
+    </div>
+
+    <div class="section-anchor" id="gestao-de-banca"></div>
+    <div class="section-container" id="section1">
+        <div class="content-wrapper">
+            <div class="section-image">
+                <img src="https://i.postimg.cc/KzP735CN/banca.jpg" alt="Introdução">
+            </div>
+            <div class="section-text">
+                <h2 class="section-title" >Gestão de Banca: A Chave para Apostas Inteligentes</h2>
+                <p class="section-text">Essencial no mundo das apostas, a Gestão de Banca é o equilíbrio entre ganhos e perdas, minimizando riscos. Esse controle é crucial; sem ele, as chances de perder todo o investimento são altas. A Gestão de Banca envolve definir apostas conservadoras ou agressivas, mantendo uma unidade de aposta consistente.</p>
+            </div>
+            <!-- Adicione a imagem correspondente aqui -->
+        </div>
+    </div>
+
+    <div class="section-anchor" id="estabelecendo-metas-no-cassino"></div>
+    <div class="section-container">
+        <div class="content-wrapper">
+            <div class="section-text">
+                <h2 class="section-title">Estabelecendo Metas no Cassino</h2>
+                <p class="section-text" id="metas">É vital estabelecer metas claras, semelhantes às dos mercados financeiros. Uma boa prática é definir um limite de lucro diário de 3 a 5% (stop win) e um limite de perda de 7 a 10% (stop loss). Após um revés (red), é recomendável pausar e evitar sinais por um tempo, pois os reds tendem a ocorrer em sequência.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-anchor" id="localizando-o-jogo"></div>
+    <div class="section-container" id="section2">
+        <div class="content-wrapper">
+            <div class="section-image">
+                <img src="https://i.postimg.cc/RZq19Yzr/localizando.png" alt="Introdução">
+            </div>
+            <div class="section-text">
+                <h2 class="section-title">Localizando o Jogo</h2>
+                <p class="section-text">Para acessar o Bac Bo, siga o link da mesa enviada, navegue até "Jogos Ao Vivo" clicando no botão localizado ao extremo sul direita da tela e selecione "Bac Bo".</p>
+            </div>
+            <!-- Adicione a imagem correspondente aqui -->
+        </div>
+    </div>
+
+    <div class="section-anchor" id="nossa-estrategia-com-martingale"></div>
+    <div class="section-container">
+        <div class="content-wrapper">
+            <div class="section-text">
+                <h2 class="section-title">Nossa Estratégia com Martingale</h2>
+                <p class="section-text">Utilizamos a técnica Martingale, que consiste em dobrar a aposta após cada derrota, até uma vitória. Limitamos a três entradas: se a terceira for perdida, encerramos e partimos para a próxima rodada. Protegemos nossas apostas no empate (tie) com uma porcentagem do valor principal, porém apenas em entradas altas.</p>
+                <p>Supondo que o sinal enviar a cor vermelha.</p>
+                <p>1ª entrada: R$10,00</p>
+                <p>2ª entrada: R$20,00</p> 
+                <p>3ª entrada: R$40,00</p>
+                <p>Caso não dê vermelho na entrada, repetimo a cor, em dobro, na proxima entrada. Mas caso dê vermelho em alguma das entradas, paramos por ali.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-anchor" id="compreendendo-as-notificacoes"></div>
+    <div class="section-container" id="section3">
+        <div class="content-wrapper">
+            <div class="section-image">
+                <img src="https://i.postimg.cc/HWMpxqMw/mensagem.png" alt="Introdução">
+            </div>
+            <div class="section-text">
+                <h2 class="section-title" id="compreendendo-as-notificacoes">Compreendendo as Notificações</h2>
+                <p class="section-text">Fique atento às notificações de "Analisando" e "Entrada Confirmada", que indicam a cor a ser apostada e a proteção necessária.</p>
+            </div>
+            <!-- Adicione a imagem correspondente aqui -->
+        </div>
+    </div>
+
+    <div class="section-anchor" id="realizando-a-entrada"></div>
+    <div class="section-container">
+        <div class="content-wrapper">
+            <div class="section-text">
+                <h2 class="section-title" id="realizando-a-entrada">Realizando a Entrada</h2>
+                <p class="section-text">Localize a mesa indicada na notificação, escolha o valor e selecione a cor da aposta. Em caso de derrota, use a opção "REPETIR" e depois "x2" para dobrar a aposta anterior, seguindo nossa estratégia. Mantenha-se atento ao cronômetro no canto superior direito.</p>
+            </div>
+            <div class="section-image">
+                <img src="https://i.postimg.cc/jjNB4bhK/aposta.png" alt="Introdução">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleTheme() {
+        var body = document.body;
+        var themeIcon = document.getElementById('themeIcon');
+        body.classList.toggle('dark-mode');
+    if (body.classList.contains('dark-mode')) {
+        themeIcon.innerHTML = '🌙'; // Ícone de lua para o modo escuro
+        } 
+    else {
+        themeIcon.innerHTML = '☀'; // Ícone de sol para o modo claro
+        }
+    }
+
+function openNav() {
+    if (window.innerWidth > 768) {
+        document.getElementById("mySidebar").style.width = "25%";
+    } else {
+        document.getElementById("mySidebar").style.width = "70%";
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+}
+let sections = document.querySelectorAll(".section-container, .gif-container");
+    let currentSectionIndex = 0;
+    let isScrolling = false;
+
+    window.addEventListener("wheel", (e) => {
+        if (isScrolling) return;
+        if (e.deltaY > 0) {
+            // Scroll para baixo
+            currentSectionIndex = Math.min(currentSectionIndex + 1, sections.length - 1);
+        } else if (e.deltaY < 0) {
+            // Scroll para cima
+            currentSectionIndex = Math.max(currentSectionIndex - 1, 0);
+        }
+
+        let headerOffset = 70; // Altura do cabeçalho
+        let sectionPosition = sections[currentSectionIndex].offsetTop - headerOffset;
+
+        window.scrollTo({
+            top: sectionPosition,
+            behavior: 'smooth'
+        });
+
+        isScrolling = true;
+        setTimeout(() => {
+            isScrolling = false;
+        }, 100); // Tempo para a próxima rolagem (em milissegundos)
+    });
+        // Função para ajustar a posição das imagens
+        function adjustImagePosition() {
+        const sectionsToAdjust = document.querySelectorAll('#section1, #section2, #section3');
+
+        sectionsToAdjust.forEach(section => {
+            const imageDiv = section.querySelector('.section-image');
+            const textDiv = section.querySelector('.section-text');
+            const contentWrapper = section.querySelector('.content-wrapper');
+
+            if (window.innerWidth >= 1000) {
+                // Mova a imagem para o início do content-wrapper
+                if (imageDiv) {
+                    contentWrapper.insertBefore(imageDiv, textDiv);
+                }
+            } else {
+                // Mova a imagem para o final do content-wrapper
+                if (imageDiv) {
+                    contentWrapper.appendChild(imageDiv);
+                }
+            }
+        });
+    }
+
+    window.onload = adjustImagePosition;
+    window.onresize = adjustImagePosition;
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
