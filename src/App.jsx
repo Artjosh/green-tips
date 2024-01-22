@@ -15,6 +15,10 @@ const App = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
     };
 
+    const closeSidebar = () => {
+        setSidebarOpen(false);
+    };
+
     return (
         <div className={`${theme}-mode`}>
             <div className="header-bar">
@@ -24,7 +28,7 @@ const App = () => {
               </span>
             </div>
 
-            <Sidebar isOpen={isSidebarOpen} />
+            <Sidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
             <MainContent />
         </div>
     );
