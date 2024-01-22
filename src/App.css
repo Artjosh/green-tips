@@ -74,7 +74,7 @@ body {
 .section-container {
   background-color: #f5f5f5; /* Fundo cinza claro para cada seção */
   border-radius: 8px; /* Bordas arredondadas */
-  margin: 20px 20px 20px 20px; /* Espaçamento entre as seções */
+  margin-bottom: 20px;
   padding: 20px; /* Espaçamento interno */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   height: 80vh;
@@ -126,7 +126,7 @@ html {
 }
 
 .container{
-  height: 100%;
+  min-height: 100vh;
 }
 
 .section-image {
@@ -144,4 +144,16 @@ html {
 }
 #metas {
   font-size: x-large;
+}
+
+.sidebar {
+  width: 0;
+  transition: 0.5s;
+  /* restante do seu CSS */
+}
+
+.sidebar.open {
+  width: auto; /* Ou qualquer outra largura que você desejar */
+  min-width: 330px;
+  padding: 50px 20px 20px 20px
 }
