@@ -2,6 +2,7 @@ import React from 'react';
 
 const Sidebar = ({ isOpen, closeSidebar }) => {
     return (
+
         <div id="mySidebar" className={`sidebar ${isOpen ? 'open' : ''}`}>
             <a href="javascript:void(0)" onClick={closeSidebar} className="closebtn">&times;</a>
             <a href="#introducao-ao-bac-bo" onClick={closeSidebar}>Introdução ao Bac Bo</a>
